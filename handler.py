@@ -3,7 +3,7 @@ from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 import torch
 from pathlib import Path
 
-MODEL_PATH = Path("/runpod-volume/Mistral_weight")
+MODEL_PATH = Path("/workspace/Mistral_weight")
 
 print("Loading model...")
 
@@ -43,9 +43,10 @@ def handler(job):
     outputs = generator(
         prompt,
         max_new_tokens=max_tokens,
-        do_sample=True,
+        do_sample=True,   
         temperature=temperature
     )
+
     return {"output": outputs[0]["generated_text"]}
 
 # Start RunPod worker
